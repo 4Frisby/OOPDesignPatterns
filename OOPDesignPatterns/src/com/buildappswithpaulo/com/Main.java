@@ -1,28 +1,26 @@
 package com.buildappswithpaulo.com;
 
-import com.buildappswithpaulo.com.controller.CreditCardAlgorithm;
-import com.buildappswithpaulo.com.controller.PaypalAlgorithm;
-import com.buildappswithpaulo.com.controller.ShoppingCart;
-import com.buildappswithpaulo.com.model.Product;
+import com.buildappswithpaulo.com.interfaces.IceCream;
+import com.buildappswithpaulo.com.model.BasicIceCream;
+import com.buildappswithpaulo.com.model.MintIceCream;
+import com.buildappswithpaulo.com.model.VanillaIceCream;
 
 public class Main {
 
     public static void main(String[] args) {
-        ShoppingCart cart = new ShoppingCart();
 
-        Product pants = new Product("234", 25);
-        Product shirt = new Product("987", 15);
+        IceCream basicIceCream = new BasicIceCream();
+        System.out.println("Basic Ice-cream cost $" + basicIceCream.cost());
 
+        //Add Vanilla to the order
 
-        cart.addProduct(pants);
-        cart.addProduct(shirt);
-
-
-        //payment decisions
-        cart.pay(new PaypalAlgorithm("paulo@buildappswithpaulo.com", "nowayman"));
+        IceCream vanilla = new VanillaIceCream(basicIceCream); // wrapping vanilla
+        System.out.println("Adding Vanilla - cost is: $" + vanilla.cost());
 
 
-        cart.pay(new CreditCardAlgorithm("Paulo", "238756464"));
+        //Add Mint to the order
+        IceCream mint = new MintIceCream(vanilla);
+        System.out.println("Adding Mint - cost is: $" + mint.cost());
 
 
     }
